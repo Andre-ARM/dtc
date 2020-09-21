@@ -68,9 +68,9 @@ const char *fdt_get_string(const void *fdt, int stroffset, int *lenp)
 		}
 	} else if (fdt_magic(fdt) == FDT_SW_MAGIC) {
 		if ((stroffset >= 0)
-		    || (stroffset < -fdt_size_dt_strings(fdt)))
+		    || (stroffset < -(int)fdt_size_dt_strings(fdt)))
 			goto fail;
-		if ((-stroffset) < len)
+		if ((unsigned)(-stroffset) < len)
 			len = -stroffset;
 	} else {
 		err = -FDT_ERR_INTERNAL;
