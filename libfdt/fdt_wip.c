@@ -20,10 +20,10 @@ int fdt_setprop_inplace_namelen_partial(void *fdt, int nodeoffset,
 
 	propval = fdt_getprop_namelen_w(fdt, nodeoffset, name, namelen,
 					&proplen);
-	if (!propval)
+	if (!propval || proplen < 0)
 		return proplen;
 
-	if (proplen < (len + idx))
+	if ((unsigned)proplen < (len + idx))
 		return -FDT_ERR_NOSPACE;
 
 	memcpy((char *)propval + idx, val, len);
