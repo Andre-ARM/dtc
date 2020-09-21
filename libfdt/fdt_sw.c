@@ -112,7 +112,7 @@ int fdt_create_with_flags(void *buf, int bufsize, uint32_t flags)
 					 sizeof(struct fdt_reserve_entry));
 	void *fdt = buf;
 
-	if (bufsize < hdrsize)
+	if (bufsize < 0 || (unsigned)bufsize < hdrsize)
 		return -FDT_ERR_NOSPACE;
 
 	if (flags & ~FDT_CREATE_FLAGS_ALL)
